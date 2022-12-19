@@ -1,0 +1,12 @@
+{
+  "name": "artus-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jeffrey Parrish",
+  "license": "UNLICENSED",
+  "private": true,
+	"workspaces": [
+		"artus-backend",
+		"artus-frontend"
+	]
+}
