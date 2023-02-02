@@ -1,25 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import LoginForm from "./components/LoginForm/LoginForm";
+import { ChakraProvider, Container } from "@chakra-ui/react";
+import "./App.css";
+import {
+  AuthenticationSuccessResponse,
+  isAuthenticationSuccessResponse,
+} from "./api/authenticate";
+import CustomerList from "./components/CustomerList";
 
 function App() {
+  const hydratedLoginDetails = JSON.parse(
+    localStorage.getItem("login-details") || "{}"
+  );
+  const defaultLoginDetails = isAuthenticationSuccessResponse(
+    hydratedLoginDetails
+  )
+    ? hydratedLoginDetails
+    : null;
+  const [loginDetails, setLoginDetails] =
+    React.useState<AuthenticationSuccessResponse | null>(defaultLoginDetails);
+  const saveLoginDetails = (details: AuthenticationSuccessResponse) => {
+    setLoginDetails(details);
+    localStorage.setItem("login-details", JSON.stringify(details));
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+      {!loginDetails ? (
+        <LoginForm setLoginDetails={saveLoginDetails} />
+      ) : (
+        <Container maxW="1200px">
+          <CustomerList token={loginDetails.token} />
+        </Container>
+      )}
+    </ChakraProvider>
   );
 }
 
