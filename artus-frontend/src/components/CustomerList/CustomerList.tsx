@@ -26,6 +26,63 @@ type CustomerListProps = {
   token: string;
 };
 
+function limitCustomers(search: string, customers: CustomerRecord[]) {
+  /*
+  let iteration = 0;
+  console.log("while loop version");
+  while (iteration < customers.length) {
+    const customer = customers[iteration];
+    console.log({customer, iteration});
+    iteration++;
+  }
+
+  console.log("for loop version");
+  for (let i = 0; i < customers.length; i++) {
+    const customer = customers[i];
+    console.log({customer, i})
+  }
+
+  console.log("for .. in version");
+  for (const customerKey in customers) {
+    const customer = customers[customerKey]
+    console.log({customer, customerKey});
+  }
+
+  console.log("for .. of version");
+  for (const customer of  customers) {
+    console.log({customer});
+  }
+
+  console.log("the stupid do .. while version");
+  iteration = 0;
+  do {
+    const customer = customers[iteration];
+    console.log({iteration, customer })
+    iteration ++;
+  } while (iteration < customers.length);
+  */
+
+  const justName = customers.map((customer) => {
+    return customer.ticketCopies;
+  });
+  //const keyField: keyof CustomerRecord = "address1";
+  console.log("===========================================");
+  (Object.keys(customers[0]) as (keyof CustomerRecord)[]).map((keyField) => {
+    const customersByField = customers.reduce(
+      (customersByCity: Record<string, CustomerRecord[]>, customer) => {
+        if (customer[keyField] as any in customersByCity) {
+          customersByCity[customer[keyField] as any].push(customer);
+          return customersByCity;
+        }
+        customersByCity[customer[keyField] as any] = [customer];
+        return customersByCity;
+      },
+      {}
+    );
+    console.log({ keyField, customersByField, justName });
+  });
+}
+
 export default function CustomerList({ token }: CustomerListProps) {
   const [loading, setLoading] = React.useState(false);
   const [customers, setCustomers] = React.useState<CustomerRecord[]>([]);
@@ -40,6 +97,7 @@ export default function CustomerList({ token }: CustomerListProps) {
       setLoading(false);
     })();
   }, [token]);
+  limitCustomers("", customers);
 
   const SearchKeyUpHandler: React.KeyboardEventHandler<HTMLInputElement> = (
     event
