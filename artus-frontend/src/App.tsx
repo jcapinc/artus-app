@@ -7,6 +7,7 @@ import {
   isAuthenticationSuccessResponse,
 } from "./api/authenticate";
 import CustomerList from "./components/CustomerList";
+import theme from './theme';
 
 function App() {
   const hydratedLoginDetails = JSON.parse(
@@ -24,11 +25,11 @@ function App() {
     localStorage.setItem("login-details", JSON.stringify(details));
   };
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       {!loginDetails ? (
         <LoginForm setLoginDetails={saveLoginDetails} />
       ) : (
-        <Container maxW="1200px">
+        <Container maxW="1400px">
           <CustomerList token={loginDetails.token} />
         </Container>
       )}

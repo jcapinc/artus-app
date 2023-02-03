@@ -10,7 +10,8 @@
     "artus-frontend"
   ],
   "scripts": {
-    "start": "concurrently --kill-others \"yarn workspace artus-backend run start\" \"yarn workspace artus-frontend run start\""
+    "start": "concurrently --kill-others \"yarn workspace artus-backend run start\" \"yarn workspace artus-frontend run start\"",
+    "prod": "concurrently --kill-others \"yarn workspace artus-backend run start\" \"yarn workspace artus-frontend run start\""
   },
   "devDependencies": {
     "concurrently": "^7.6.0"
