@@ -15,8 +15,8 @@ import {
 import {
   attemptLogin,
   Credentials,
-  Error,
-  AuthenticationSuccessResponse,
+  type Error,
+  type AuthenticationSuccessResponse,
 } from "../../api/authenticate";
 
 export type LoginFormProps = {
