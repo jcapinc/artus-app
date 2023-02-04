@@ -1,19 +1,16 @@
 {
   "name": "artus-app",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "Jeffrey Parrish",
-  "license": "UNLICENSED",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {},
   "private": true,
-  "workspaces": [
-    "artus-backend",
-    "artus-frontend"
-  ],
-  "scripts": {
-    "start": "concurrently --kill-others \"yarn workspace artus-backend run start\" \"yarn workspace artus-frontend run start\"",
-    "prod": "concurrently --kill-others \"yarn workspace artus-backend run start\" \"yarn workspace artus-frontend run start\""
-  },
+  "dependencies": {},
   "devDependencies": {
-    "concurrently": "^7.6.0"
-  }
+    "@nrwl/nx-cloud": "latest",
+    "nx": "15.6.3",
+    "prettier": "^2.6.2"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
