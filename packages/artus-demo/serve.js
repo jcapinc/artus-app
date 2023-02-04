@@ -12,7 +12,7 @@ const app = express();
 const args = {
   port: process.env.PORT || 8080
 };
-const argIndex = 2;
+let argIndex = 2;
 while(process.argv[argIndex]) {
   switch(process.argv[argIndex]) {
     case "-p":
@@ -20,6 +20,7 @@ while(process.argv[argIndex]) {
       args.port = process.argv[++argIndex];
       break;
   }
+  argIndex++;
 }
 
 app.use(cors());
